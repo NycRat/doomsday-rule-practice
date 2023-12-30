@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --base=/doomsday-rule-practice",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@solidjs/router": "^0.10.5",
     "solid-js": "^1.8.7"
   },
   "devDependencies": {
