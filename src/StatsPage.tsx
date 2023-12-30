@@ -17,7 +17,7 @@ function StatsPage() {
               {Weekday[record.given_answer]}
               {" - "}
               {Weekday[record.target_date.getDay()]}(
-              {record.target_date.toLocaleDateString()}) (
+              {record.target_date.toISOString().slice(0, 10)}) (
               {getTimeDiffInSeconds(record.start_time, record.end_time)}s)
             </div>
           )}

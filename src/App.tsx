@@ -46,7 +46,7 @@ function App() {
       </nav>
 
       <div id="center-thingy">
-        <h2>{curRecord().target_date.toLocaleDateString()}</h2>
+        <h2>{curRecord().target_date.toISOString().slice(0, 10)}</h2>
         <form onSubmit={handleSubmit}>
           <label>
             <input
