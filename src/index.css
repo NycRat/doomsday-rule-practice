@@ -34,7 +34,7 @@ input {
   font-family: "Nova Mono", monospace;
 }
 
-A {
+a {
   color: white;
   position: absolute;
   top: 10px;
