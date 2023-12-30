@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { getNewRecord, getStoredRecords } from "./utils";
+import { getNewRecord, getStoredRecords, getTimeDiffInSeconds } from "./utils";
 import { Record, Weekday } from "./models";
 import { A } from "@solidjs/router";
 
@@ -31,6 +31,13 @@ function App() {
     window.localStorage.setItem("records", JSON.stringify(records()));
   }
 
+  setInterval(() => {
+    setCurRecord({
+      ...curRecord(),
+      end_time: new Date(),
+    });
+  }, 1);
+
   return (
     <>
       <nav>
@@ -50,6 +57,11 @@ function App() {
             />
           </label>
         </form>
+        {getTimeDiffInSeconds(
+          curRecord().start_time,
+          curRecord().end_time,
+        ).toFixed(3)}
+        s
       </div>
     </>
   );
