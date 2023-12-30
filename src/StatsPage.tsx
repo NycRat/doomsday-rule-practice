@@ -1,6 +1,7 @@
 import { For, createSignal } from "solid-js";
 import { getStoredRecords, getTimeDiffInSeconds } from "./utils";
 import { Record, Weekday } from "./models";
+import { A } from "@solidjs/router";
 
 function StatsPage() {
   const [records, _setRecords] = createSignal<Record[]>(getStoredRecords());
@@ -8,7 +9,7 @@ function StatsPage() {
   return (
     <div>
       <h1>Stats</h1>
-      <a href="/">Practice</a>
+      <A href="/">Practice</A>
       <div id="center-thingy">
         <For each={records()}>
           {(record) => (

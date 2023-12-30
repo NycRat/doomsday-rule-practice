@@ -9,7 +9,7 @@ const root = document.getElementById("root");
 
 render(
   () => (
-    <Router>
+    <Router base="/doomsday-rule-practice">
       <Route path="/stats" component={StatsPage} />
       <Route path="*" component={App} />
     </Router>

@@ -1,6 +1,7 @@
 import { createSignal } from "solid-js";
 import { getNewRecord, getStoredRecords } from "./utils";
 import { Record, Weekday } from "./models";
+import { A } from "@solidjs/router";
 
 function App() {
   const [records, setRecords] = createSignal<Record[]>(getStoredRecords());
@@ -34,7 +35,7 @@ function App() {
     <>
       <nav>
         <h1>Doomsday Rule</h1>
-        <a href="/stats">Stats</a>
+        <A href="/stats">Stats</A>
       </nav>
 
       <div id="center-thingy">
