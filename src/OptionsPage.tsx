@@ -36,7 +36,7 @@ function OptionsPage() {
           {Array.from({ length: 3 }, (_, i) => {
             return (
               <>
-                <span
+                <button
                   class={
                     "text-option" +
                     (options().inputMode === i ? " selected" : "")
@@ -44,7 +44,7 @@ function OptionsPage() {
                   onClick={() => setOptions({ ...options(), inputMode: i })}
                 >
                   {InputMode[i]}
-                </span>{" "}
+                </button>{" "}
               </>
             );
           })}
