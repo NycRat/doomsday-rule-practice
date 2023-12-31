@@ -10,6 +10,13 @@ function App() {
 
   function handleSubmit(event: SubmitEvent) {
     event.preventDefault();
+
+    if (inputValue() === "r") {
+      setCurRecord(getNewRecord());
+      setInputValue("");
+      return;
+    }
+
     let day: Weekday = parseInt(inputValue());
     if (isNaN(day) || day < 0 || day > 6) {
       return;
@@ -28,7 +35,7 @@ function App() {
     setRecords([record, ...records()]);
     setCurRecord(getNewRecord());
     setInputValue("");
-    window.localStorage.setItem("records", JSON.stringify(records()));
+    localStorage.setItem("records", JSON.stringify(records()));
   }
 
   setInterval(() => {
@@ -40,10 +47,11 @@ function App() {
 
   return (
     <>
-      <nav>
-        <h1>Doomsday Rule</h1>
+      <h1>Doomsday Rule</h1>
+      <div class="links">
         <A href="/stats">Stats</A>
-      </nav>
+        <A href="/options">Options</A>
+      </div>
 
       <div id="center-thingy">
         <h2>{curRecord().target_date.toISOString().slice(0, 10)}</h2>

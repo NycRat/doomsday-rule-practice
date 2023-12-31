@@ -12,7 +12,7 @@ function Stat(props: { name: string; value: string }) {
   );
 }
 
-function RecordRow(props: { record: Record }) {
+function RecordRow(props: { record: Record; deleteFunction: () => void }) {
   const record = props.record;
   return (
     <tr
@@ -28,17 +28,29 @@ function RecordRow(props: { record: Record }) {
       <td>
         {getTimeDiffInSeconds(record.start_time, record.end_time).toFixed(3)}s
       </td>
+      <td class="delete-row" onClick={props.deleteFunction}>
+        X
+      </td>
     </tr>
   );
 }
 
 function StatsPage() {
-  const [records, _setRecords] = createSignal<Record[]>(getStoredRecords());
+  const [records, setRecords] = createSignal<Record[]>(getStoredRecords());
+
+  function deleteRecord(i: number) {
+    let newRecords = [...records()];
+    newRecords.splice(i, 1);
+    setRecords(newRecords);
+    localStorage.setItem("records", JSON.stringify(records()));
+  }
 
   return (
     <div>
       <h1>Stats</h1>
-      <A href="/">Practice</A>
+      <div class="links">
+        <A href="/">Practice</A>
+      </div>
       <div id="stats-page">
         <div class="stats-bar">
           <Stat name="Total" value={records().length.toString()} />
@@ -59,11 +71,17 @@ function StatsPage() {
                 <th>Actual</th>
                 <th>Guess</th>
                 <th>Time</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
               <For each={records()}>
-                {(record) => <RecordRow record={record} />}
+                {(record, i) => (
+                  <RecordRow
+                    record={record}
+                    deleteFunction={() => deleteRecord(i())}
+                  />
+                )}
               </For>
             </tbody>
           </table>

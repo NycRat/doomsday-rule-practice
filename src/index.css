@@ -41,11 +41,15 @@ input {
   text-align: center;
 }
 
-a {
-  color: white;
+.links {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+A {
+  display: block;
+  color: white;
 }
 
 @keyframes spin {
@@ -75,11 +79,11 @@ a {
 }
 
 .correct {
-  background: #1a6c2e;
+  background-color: #1d9d28;
 }
 
 .incorrect {
-  background-color: #242233;
+  background-color: #89211c;
 }
 
 .stats-bar {
@@ -124,18 +128,26 @@ td {
 
 th {
   font-weight: bold;
-  border-bottom: 1px solid #808080;
 }
 
 tr {
   transition: background-color 0.2s ease;
 }
 
-tbody tr:hover {
-  background-color: #392758;
-}
+/* tbody tr:hover { */
+/*   background-color: #392758; */
+/* } */
 
 table {
   width: 100%;
   border: 1px solid #4d4d4d;
+}
+
+.delete-row {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.delete-row:hover {
+  background-color: #e61d2d;
 }
