@@ -17,16 +17,16 @@ function RecordRow(props: { record: Record; deleteFunction: () => void }) {
   return (
     <tr
       class={
-        record.given_answer === record.target_date.getDay()
+        record.givenAnswer === record.targetDate.getDay()
           ? "correct"
           : "incorrect"
       }
     >
-      <td>{record.target_date.toISOString().slice(0, 10)}</td>
-      <td>{Weekday[record.target_date.getDay()]}</td>
-      <td>{Weekday[record.given_answer]}</td>
+      <td>{record.targetDate.toISOString().slice(0, 10)}</td>
+      <td>{Weekday[record.targetDate.getDay()]}</td>
+      <td>{Weekday[record.givenAnswer]}</td>
       <td>
-        {getTimeDiffInSeconds(record.start_time, record.end_time).toFixed(3)}s
+        {getTimeDiffInSeconds(record.startTime, record.endTime).toFixed(3)}s
       </td>
       <td class="delete-row" onClick={props.deleteFunction}>
         X

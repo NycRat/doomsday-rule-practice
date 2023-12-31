@@ -21,10 +21,10 @@ export function getNewRecord(): Record {
   randomDate.setHours(0, 0, 0, 0);
 
   return {
-    start_time: new Date(),
-    end_time: new Date(),
-    target_date: randomDate,
-    given_answer: Weekday.Sunday,
+    startTime: new Date(),
+    endTime: new Date(),
+    targetDate: randomDate,
+    givenAnswer: Weekday.Sunday,
   };
 }
 
@@ -40,10 +40,10 @@ export function getStoredRecords(): Record[] {
   let thingy: Record[] = JSON.parse(stored_records);
 
   let parsed_stored_records: Record[] = thingy.map((record) => ({
-    start_time: new Date(record.start_time),
-    end_time: new Date(record.end_time),
-    target_date: new Date(record.target_date),
-    given_answer: record.given_answer,
+    startTime: new Date(record.startTime),
+    endTime: new Date(record.endTime),
+    targetDate: new Date(record.targetDate),
+    givenAnswer: record.givenAnswer,
   }));
   return parsed_stored_records;
 }

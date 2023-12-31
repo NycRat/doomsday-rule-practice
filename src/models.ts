@@ -8,9 +8,19 @@ export enum Weekday {
   Saturday,
 }
 
+export enum InputMode {
+  TextInput,
+  ButtonInput,
+}
+
 export interface Record {
-  start_time: Date;
-  end_time: Date;
-  target_date: Date;
-  given_answer: Weekday;
+  startTime: Date;
+  endTime: Date;
+  targetDate: Date;
+  givenAnswer: Weekday;
+}
+
+export interface Options {
+  inputMode: InputMode;
+  blindTime: number;
 }

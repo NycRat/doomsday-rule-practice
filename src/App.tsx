@@ -1,16 +1,19 @@
 import { createSignal } from "solid-js";
 import { getNewRecord, getStoredRecords, getTimeDiffInSeconds } from "./utils";
-import { Record, Weekday } from "./models";
+import { Options, Record, Weekday, InputMode } from "./models";
 import { A } from "@solidjs/router";
 
 function App() {
   const [records, setRecords] = createSignal<Record[]>(getStoredRecords());
   const [curRecord, setCurRecord] = createSignal<Record>(getNewRecord());
-  const [inputValue, setInputValue] = createSignal("");
+  const [inputValue, setInputValue] = createSignal("Day of week (0-6)");
 
-  function handleSubmit(event: SubmitEvent) {
-    event.preventDefault();
+  const options: Options = {
+    inputMode: InputMode.TextInput,
+    blindTime: 0,
+  };
 
+  function handleSubmit() {
     if (inputValue() === "r") {
       setCurRecord(getNewRecord());
       setInputValue("");
@@ -18,32 +21,46 @@ function App() {
     }
 
     let day: Weekday = parseInt(inputValue());
-    if (isNaN(day) || day < 0 || day > 6) {
+    if (isNaN(day) || day < 0 || day > 7) {
       return;
     }
 
+    day = day % 7;
+
     let record: Record = {
       ...curRecord(),
-      end_time: new Date(),
-      given_answer: day,
+      endTime: new Date(),
+      givenAnswer: day,
     };
 
-    if (day !== record.target_date.getDay()) {
-      alert("Incorrect, was " + Weekday[record.target_date.getDay()]);
+    if (day !== record.targetDate.getDay()) {
+      alert("Incorrect, was " + Weekday[record.targetDate.getDay()]);
     }
 
     setRecords([record, ...records()]);
     setCurRecord(getNewRecord());
-    setInputValue("");
+    setInputValue("Day of week (0-6)");
     localStorage.setItem("records", JSON.stringify(records()));
   }
 
   setInterval(() => {
     setCurRecord({
       ...curRecord(),
-      end_time: new Date(),
+      endTime: new Date(),
     });
   }, 1);
+
+  addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+    if (parseInt(e.key) >= 0 && parseInt(e.key) <= 7) {
+      setInputValue(e.key);
+    }
+    if (e.key === "r") {
+      setInputValue(e.key);
+    }
+  });
 
   return (
     <>
@@ -54,20 +71,17 @@ function App() {
       </div>
 
       <div id="center-thingy">
-        <h2>{curRecord().target_date.toISOString().slice(0, 10)}</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            <input
-              type="text"
-              value={inputValue()}
-              placeholder="Day of week (0-6)"
-              onInput={(e) => setInputValue(e.target.value)}
-            />
-          </label>
-        </form>
+        <h2>{curRecord().targetDate.toISOString().slice(0, 10)}</h2>
+        {options.inputMode === InputMode.TextInput && (
+          <div
+            class={"input" + (inputValue().length !== 1 ? " placeholder" : "")}
+          >
+            {inputValue()}
+          </div>
+        )}
         {getTimeDiffInSeconds(
-          curRecord().start_time,
-          curRecord().end_time,
+          curRecord().startTime,
+          curRecord().endTime,
         ).toFixed(3)}
         s
       </div>

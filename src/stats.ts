@@ -2,7 +2,7 @@ import { Record } from "./models";
 import { getTimeDiffInSeconds } from "./utils";
 
 function isCorrect(record: Record) {
-  return record.given_answer === record.target_date.getDay();
+  return record.givenAnswer === record.targetDate.getDay();
 }
 
 export function getStatsSuccessRate(records: Record[]): string {
@@ -24,11 +24,11 @@ export function getStatsAverageTime(
   for (const record of records) {
     if (correctOnly) {
       if (isCorrect(record)) {
-        totalTime += getTimeDiffInSeconds(record.start_time, record.end_time);
+        totalTime += getTimeDiffInSeconds(record.startTime, record.endTime);
         totalRecords++;
       }
     } else {
-      totalTime += getTimeDiffInSeconds(record.start_time, record.end_time);
+      totalTime += getTimeDiffInSeconds(record.startTime, record.endTime);
       totalRecords++;
     }
   }
