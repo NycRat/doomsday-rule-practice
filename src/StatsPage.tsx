@@ -57,7 +57,7 @@ function StatsPage() {
           <Stat name="Success Rate" value={getStatsSuccessRate(records())} />
           <Stat name="Average Time" value={getStatsAverageTime(records())} />
           <Stat
-            name="Average Time (Correct Only)"
+            name="Average Time (Correct)"
             value={getStatsAverageTime(records(), true)}
           />
         </div>

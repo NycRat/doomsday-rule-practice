@@ -157,3 +157,42 @@ table {
 .delete-row:hover {
   background-color: #e61d2d;
 }
+
+.text-option {
+  cursor: pointer;
+  border: 1px solid #555;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.text-option:hover {
+  text-decoration: underline;
+}
+
+.active {
+  background-color: #381a40;
+}
+
+#options-page div {
+  margin: 10px;
+}
+
+.input-buttons {
+  margin: 20px;
+}
+
+.input-buttons span {
+  display: inline-block;
+  background-color: #23243f;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 1.2em;
+  margin: 0 10px;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.input-buttons span:hover {
+  background-color: #303366;
+}

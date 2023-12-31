@@ -1,7 +1,13 @@
 import { createSignal, onCleanup, onMount } from "solid-js";
-import { getNewRecord, getStoredOptions, getStoredRecords, getTimeDiffInSeconds } from "./utils";
+import {
+  getNewRecord,
+  getStoredOptions,
+  getStoredRecords,
+  getTimeDiffInSeconds,
+} from "./utils";
 import { Options, Record, Weekday, InputMode } from "./models";
 import { A } from "@solidjs/router";
+import InputButton from "./InputButton";
 
 function App() {
   const [records, setRecords] = createSignal<Record[]>(getStoredRecords());
@@ -96,7 +102,14 @@ function App() {
             {inputValue()}
           </div>
         ) : (
-          <div></div>
+          <div class="input-buttons">
+            {Array.from({ length: 7 }, (_, i) => {
+              return <InputButton day={i} onClick={() => {
+                setInputValue(String(i));
+                handleSubmit();
+              }}/>;
+            })}
+          </div>
         )}
         {getTimeDiffInSeconds(
           curRecord().startTime,

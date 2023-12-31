@@ -32,8 +32,30 @@ function OptionsPage() {
           ({options().blindTime.toFixed(2)}s)
         </div>
         <div>
-          Input Mode: {InputMode[InputMode.TextInput]},
-          {InputMode[InputMode.ButtonInput]}
+          Input Mode:{" "}
+          <span
+            class={
+              "text-option" +
+              (options().inputMode === InputMode.TextInput ? " active" : "")
+            }
+            onClick={() =>
+              setOptions({ ...options(), inputMode: InputMode.TextInput })
+            }
+          >
+            {InputMode[InputMode.TextInput]}
+          </span>
+          {" | "}
+          <span
+            class={
+              "text-option" +
+              (options().inputMode === InputMode.ButtonInput ? " active" : "")
+            }
+            onClick={() =>
+              setOptions({ ...options(), inputMode: InputMode.ButtonInput })
+            }
+          >
+            {InputMode[InputMode.ButtonInput]}
+          </span>
         </div>
       </div>
     </div>
