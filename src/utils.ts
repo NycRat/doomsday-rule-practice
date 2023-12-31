@@ -1,4 +1,4 @@
-import { Record, Weekday } from "./models";
+import { InputMode, Options, Record, Weekday } from "./models";
 
 export function getRandomDate(start: Date, end: Date) {
   const startDate = start.getTime(); // Get time in milliseconds
@@ -46,4 +46,15 @@ export function getStoredRecords(): Record[] {
     givenAnswer: record.givenAnswer,
   }));
   return parsed_stored_records;
+}
+
+export function getStoredOptions(): Options {
+  let stored_records = window.localStorage.getItem("options");
+  if (!stored_records) {
+    return {
+    inputMode: InputMode.TextInput,
+    blindTime: 0,
+  };
+  }
+  return JSON.parse(stored_records);
 }

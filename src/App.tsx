@@ -1,5 +1,5 @@
-import { createSignal } from "solid-js";
-import { getNewRecord, getStoredRecords, getTimeDiffInSeconds } from "./utils";
+import { createSignal, onCleanup, onMount } from "solid-js";
+import { getNewRecord, getStoredOptions, getStoredRecords, getTimeDiffInSeconds } from "./utils";
 import { Options, Record, Weekday, InputMode } from "./models";
 import { A } from "@solidjs/router";
 
@@ -8,15 +8,12 @@ function App() {
   const [curRecord, setCurRecord] = createSignal<Record>(getNewRecord());
   const [inputValue, setInputValue] = createSignal("Day of week (0-6)");
 
-  const options: Options = {
-    inputMode: InputMode.TextInput,
-    blindTime: 0,
-  };
+  const options: Options = getStoredOptions();
 
   function handleSubmit() {
     if (inputValue() === "r") {
       setCurRecord(getNewRecord());
-      setInputValue("");
+      setInputValue("Day of week (0-6)");
       return;
     }
 
@@ -43,14 +40,7 @@ function App() {
     localStorage.setItem("records", JSON.stringify(records()));
   }
 
-  setInterval(() => {
-    setCurRecord({
-      ...curRecord(),
-      endTime: new Date(),
-    });
-  }, 1);
-
-  addEventListener("keypress", (e) => {
+  function handleKeypress(e: KeyboardEvent) {
     if (e.key === "Enter") {
       handleSubmit();
     }
@@ -60,6 +50,27 @@ function App() {
     if (e.key === "r") {
       setInputValue(e.key);
     }
+  }
+
+  onMount(() => {
+    const id = setInterval(() => {
+      const newRecord = {
+        ...curRecord(),
+        endTime: new Date(),
+      };
+
+      // if (getTimeDiffInSeconds(newRecord.startTime, newRecord.endTime)) {
+      // }
+
+      setCurRecord(newRecord);
+    });
+
+    addEventListener("keypress", handleKeypress);
+
+    onCleanup(() => {
+      clearInterval(id);
+      removeEventListener("keypress", handleKeypress);
+    });
   });
 
   return (
@@ -71,13 +82,21 @@ function App() {
       </div>
 
       <div id="center-thingy">
-        <h2>{curRecord().targetDate.toISOString().slice(0, 10)}</h2>
-        {options.inputMode === InputMode.TextInput && (
+        <h2>
+          {options.blindTime === 0 ||
+          options.blindTime >
+            getTimeDiffInSeconds(curRecord().startTime, curRecord().endTime)
+            ? curRecord().targetDate.toISOString().slice(0, 10)
+            : "____-__-__"}
+        </h2>
+        {options.inputMode === InputMode.TextInput ? (
           <div
             class={"input" + (inputValue().length !== 1 ? " placeholder" : "")}
           >
             {inputValue()}
           </div>
+        ) : (
+          <div></div>
         )}
         {getTimeDiffInSeconds(
           curRecord().startTime,
