@@ -201,3 +201,14 @@ table {
 .input-buttons span:hover {
   background-color: #303366;
 }
+
+.github-link {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.github-link img {
+  width: 50px;
+  height: auto;
+}

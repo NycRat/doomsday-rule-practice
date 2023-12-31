@@ -8,6 +8,7 @@ import {
 import { Options, Record, Weekday, InputMode } from "./models";
 import { A } from "@solidjs/router";
 import InputButton from "./InputButton";
+import GithubLogo from "./github-mark.svg";
 
 function App() {
   const [records, setRecords] = createSignal<Record[]>(getStoredRecords());
@@ -128,6 +129,12 @@ function App() {
         ).toFixed(3)}
         s
       </div>
+      <a
+        class="github-link"
+        href="https://github.com/nycrat/doomsday-rule-practice"
+      >
+        <img src={GithubLogo} alt="Github Repo" />
+      </a>
     </>
   );
 }
