@@ -52,9 +52,9 @@ export function getStoredOptions(): Options {
   let stored_records = window.localStorage.getItem("options");
   if (!stored_records) {
     return {
-    inputMode: InputMode.TextInput,
-    blindTime: 0,
-  };
+      inputMode: InputMode.TextInput,
+      blindTime: 0,
+    };
   }
   return JSON.parse(stored_records);
 }

@@ -47,6 +47,9 @@ function App() {
   }
 
   function handleKeypress(e: KeyboardEvent) {
+    if (options.inputMode === InputMode.ButtonInput) {
+      return;
+    }
     if (e.key === "Enter") {
       handleSubmit();
     }
@@ -95,19 +98,27 @@ function App() {
             ? curRecord().targetDate.toISOString().slice(0, 10)
             : "____-__-__"}
         </h2>
-        {options.inputMode === InputMode.TextInput ? (
+        {(options.inputMode === InputMode.TextInput ||
+          options.inputMode === InputMode.TextButtonInput) && (
           <div
             class={"input" + (inputValue().length !== 1 ? " placeholder" : "")}
           >
             {inputValue()}
           </div>
-        ) : (
+        )}
+        {(options.inputMode === InputMode.ButtonInput ||
+          options.inputMode === InputMode.TextButtonInput) && (
           <div class="input-buttons">
             {Array.from({ length: 7 }, (_, i) => {
-              return <InputButton day={i} onClick={() => {
-                setInputValue(String(i));
-                handleSubmit();
-              }}/>;
+              return (
+                <InputButton
+                  day={i}
+                  onClick={() => {
+                    setInputValue(String(i));
+                    handleSubmit();
+                  }}
+                />
+              );
             })}
           </div>
         )}

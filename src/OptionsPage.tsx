@@ -33,29 +33,21 @@ function OptionsPage() {
         </div>
         <div>
           Input Mode:{" "}
-          <span
-            class={
-              "text-option" +
-              (options().inputMode === InputMode.TextInput ? " active" : "")
-            }
-            onClick={() =>
-              setOptions({ ...options(), inputMode: InputMode.TextInput })
-            }
-          >
-            {InputMode[InputMode.TextInput]}
-          </span>
-          {" | "}
-          <span
-            class={
-              "text-option" +
-              (options().inputMode === InputMode.ButtonInput ? " active" : "")
-            }
-            onClick={() =>
-              setOptions({ ...options(), inputMode: InputMode.ButtonInput })
-            }
-          >
-            {InputMode[InputMode.ButtonInput]}
-          </span>
+          {Array.from({ length: 3 }, (_, i) => {
+            return (
+              <>
+                <span
+                  class={
+                    "text-option" +
+                    (options().inputMode === i ? " selected" : "")
+                  }
+                  onClick={() => setOptions({ ...options(), inputMode: i })}
+                >
+                  {InputMode[i]}
+                </span>{" "}
+              </>
+            );
+          })}
         </div>
       </div>
     </div>

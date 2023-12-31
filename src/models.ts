@@ -11,6 +11,7 @@ export enum Weekday {
 export enum InputMode {
   TextInput,
   ButtonInput,
+  TextButtonInput,
 }
 
 export interface Record {

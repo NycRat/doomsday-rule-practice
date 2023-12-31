@@ -169,7 +169,7 @@ table {
   text-decoration: underline;
 }
 
-.active {
+.selected {
   background-color: #381a40;
 }
 
