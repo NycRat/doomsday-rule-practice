@@ -1,11 +1,12 @@
 import { createSignal, onCleanup, onMount } from "solid-js";
 import {
+  getFormattedDate,
   getNewRecord,
   getStoredOptions,
   getStoredRecords,
   getTimeDiffInSeconds,
 } from "./utils";
-import { Options, Record, Weekday, InputMode } from "./models";
+import { Options, Record, Weekday, InputMode, DateDisplayMode } from "./models";
 import { A } from "@solidjs/router";
 import InputButton from "./InputButton";
 import GithubLogo from "./github-mark.svg";
@@ -69,9 +70,6 @@ function App() {
         endTime: new Date(),
       };
 
-      // if (getTimeDiffInSeconds(newRecord.startTime, newRecord.endTime)) {
-      // }
-
       setCurRecord(newRecord);
     });
 
@@ -92,12 +90,18 @@ function App() {
       </div>
 
       <div id="center-thingy">
-        <h2>
+        <h2
+          class={
+            options.dateDisplayMode === DateDisplayMode.MonthDDYYYY
+              ? "full"
+              : ""
+          }
+        >
           {options.blindTime === 0 ||
           options.blindTime >
             getTimeDiffInSeconds(curRecord().startTime, curRecord().endTime)
-            ? curRecord().targetDate.toISOString().slice(0, 10)
-            : "____-__-__"}
+            ? getFormattedDate(curRecord().targetDate, options.dateDisplayMode)
+            : "___________"}
         </h2>
         {(options.inputMode === InputMode.TextInput ||
           options.inputMode === InputMode.TextButtonInput) && (

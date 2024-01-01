@@ -14,6 +14,13 @@ export enum InputMode {
   TextButtonInput,
 }
 
+export enum DateDisplayMode {
+  YYYYMMDD,
+  DDMMYYYY,
+  MMDDYYYY,
+  MonthDDYYYY,
+}
+
 export interface Record {
   startTime: Date;
   endTime: Date;
@@ -24,4 +31,5 @@ export interface Record {
 export interface Options {
   inputMode: InputMode;
   blindTime: number;
+  dateDisplayMode: DateDisplayMode;
 }

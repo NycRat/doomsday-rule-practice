@@ -1,5 +1,5 @@
 import { A } from "@solidjs/router";
-import { InputMode, Options } from "./models";
+import { DateDisplayMode, InputMode, Options } from "./models";
 import { createEffect, createSignal } from "solid-js";
 import { getStoredOptions } from "./utils";
 
@@ -44,6 +44,26 @@ function OptionsPage() {
                   onClick={() => setOptions({ ...options(), inputMode: i })}
                 >
                   {InputMode[i]}
+                </button>{" "}
+              </>
+            );
+          })}
+        </div>
+        <div>
+          Date Display Mode:{" "}
+          {Array.from({ length: 4 }, (_, i) => {
+            return (
+              <>
+                <button
+                  class={
+                    "text-option" +
+                    (options().dateDisplayMode === i ? " selected" : "")
+                  }
+                  onClick={() =>
+                    setOptions({ ...options(), dateDisplayMode: i })
+                  }
+                >
+                  {DateDisplayMode[i]}
                 </button>{" "}
               </>
             );
