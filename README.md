@@ -2,9 +2,9 @@
 
 Web app to practice [doomsday rule](https://en.wikipedia.org/wiki/Doomsday_rule), tracks stats, etc..
 
-[](docs/images/main.png)
+![](docs/images/main.png)
 
-[](docs/images/stats.png)
+![](docs/images/stats.png)
 
 ## Options
 
