@@ -119,7 +119,7 @@ function App() {
             {Array.from({ length: 7 }, (_, i) => {
               return (
                 <InputButton
-                  text={Weekday[i]}
+                  text={Weekday[i] + ` (${i})`}
                   onClick={() => {
                     setInputValue(String(i));
                     handleSubmit();
