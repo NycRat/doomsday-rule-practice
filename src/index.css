@@ -11,6 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  font-size: 100%;
 }
 
 h1 {
@@ -79,6 +81,8 @@ A {
   text-align: center;
   max-height: 60vh;
   overflow-y: auto;
+  width: 95%;
+  max-width: 1000px;
 }
 
 #stats-page {
@@ -187,7 +191,27 @@ table {
 }
 
 .input-buttons {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   margin: 20px;
+  grid-gap: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .input-buttons {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
+  h2 {
+    font-size: 4em;
+  }
+  .full {
+    font-size: 3em;
+  }
+  :root {
+    font-size: 80%;
+  }
 }
 
 .input-buttons span {
@@ -196,10 +220,10 @@ table {
   border-radius: 10px;
   padding: 5px;
   font-size: 1.2em;
-  margin: 0 10px;
 
   cursor: pointer;
   transition: background-color 0.2s ease;
+  user-select: none;
 }
 
 .input-buttons span:hover {

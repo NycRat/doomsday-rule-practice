@@ -1,11 +1,8 @@
-import { Weekday } from "./models";
-
-function InputButton(props: { day: Weekday; onClick: () => void }) {
+function InputButton(props: { text: string; onClick: () => void }) {
   return (
     <span onClick={props.onClick}>
-      ({props.day})
-      <br />
-      {Weekday[props.day]}
+      {/* <br /> */}
+      {props.text}
     </span>
   );
 }

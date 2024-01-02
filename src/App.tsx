@@ -12,16 +12,18 @@ import InputButton from "./InputButton";
 import GithubLogo from "./github-mark.svg";
 
 function App() {
+  const placeholderText = "Day of week (0-6)";
+
   const [records, setRecords] = createSignal<Record[]>(getStoredRecords());
   const [curRecord, setCurRecord] = createSignal<Record>(getNewRecord());
-  const [inputValue, setInputValue] = createSignal("Day of week (0-6)");
+  const [inputValue, setInputValue] = createSignal(placeholderText);
 
   const options: Options = getStoredOptions();
 
   function handleSubmit() {
     if (inputValue() === "r") {
       setCurRecord(getNewRecord());
-      setInputValue("Day of week (0-6)");
+      setInputValue(placeholderText);
       return;
     }
 
@@ -44,7 +46,7 @@ function App() {
 
     setRecords([record, ...records()]);
     setCurRecord(getNewRecord());
-    setInputValue("Day of week (0-6)");
+    setInputValue(placeholderText);
     localStorage.setItem("records", JSON.stringify(records()));
   }
 
@@ -117,7 +119,7 @@ function App() {
             {Array.from({ length: 7 }, (_, i) => {
               return (
                 <InputButton
-                  day={i}
+                  text={Weekday[i]}
                   onClick={() => {
                     setInputValue(String(i));
                     handleSubmit();
@@ -125,6 +127,13 @@ function App() {
                 />
               );
             })}
+            <InputButton
+              text={"Reset"}
+              onClick={() => {
+                setCurRecord(getNewRecord());
+                setInputValue(placeholderText);
+              }}
+            />
           </div>
         )}
         {getTimeDiffInSeconds(
