@@ -193,14 +193,25 @@ table {
 .input-buttons {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   margin: 20px;
+  grid-gap: 10px;
+}
+
+.input-buttons > div {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
 }
 
 @media only screen and (max-width: 600px) {
   .input-buttons {
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+  .input-buttons > div {
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
   }
   h2 {

@@ -116,24 +116,66 @@ function App() {
         {(options.inputMode === InputMode.ButtonInput ||
           options.inputMode === InputMode.TextButtonInput) && (
           <div class="input-buttons">
-            {Array.from({ length: 7 }, (_, i) => {
-              return (
-                <InputButton
-                  text={Weekday[i] + ` (${i})`}
-                  onClick={() => {
-                    setInputValue(String(i));
-                    handleSubmit();
-                  }}
-                />
-              );
-            })}
-            <InputButton
-              text={"Reset"}
-              onClick={() => {
-                setCurRecord(getNewRecord());
-                setInputValue(placeholderText);
-              }}
-            />
+            <div>
+              <InputButton
+                text={Weekday[0] + ` (0)`}
+                onClick={() => {
+                  setInputValue("0");
+                  handleSubmit();
+                }}
+              />
+              <InputButton
+                text={Weekday[1] + ` (1)`}
+                onClick={() => {
+                  setInputValue("1");
+                  handleSubmit();
+                }}
+              />
+              <InputButton
+                text={Weekday[2] + ` (2)`}
+                onClick={() => {
+                  setInputValue("2");
+                  handleSubmit();
+                }}
+              />
+              <InputButton
+                text={Weekday[3] + ` (3)`}
+                onClick={() => {
+                  setInputValue("3");
+                  handleSubmit();
+                }}
+              />
+            </div>
+            <div>
+              <InputButton
+                text={Weekday[4] + ` (4)`}
+                onClick={() => {
+                  setInputValue("4");
+                  handleSubmit();
+                }}
+              />
+              <InputButton
+                text={Weekday[5] + ` (5)`}
+                onClick={() => {
+                  setInputValue("5");
+                  handleSubmit();
+                }}
+              />
+              <InputButton
+                text={Weekday[6] + ` (6)`}
+                onClick={() => {
+                  setInputValue("6");
+                  handleSubmit();
+                }}
+              />
+              <InputButton
+                text={"Reset"}
+                onClick={() => {
+                  setCurRecord(getNewRecord());
+                  setInputValue(placeholderText);
+                }}
+              />
+            </div>
           </div>
         )}
         {getTimeDiffInSeconds(
