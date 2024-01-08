@@ -32,4 +32,7 @@ export interface Options {
   inputMode: InputMode;
   blindTime: number;
   dateDisplayMode: DateDisplayMode;
+  dateDisplaySlashes: boolean;
+  dateRangeYearStart: number;
+  dateRangeYearEnd: number;
 }

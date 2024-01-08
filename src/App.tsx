@@ -102,7 +102,11 @@ function App() {
           {options.blindTime === 0 ||
           options.blindTime >
             getTimeDiffInSeconds(curRecord().startTime, curRecord().endTime)
-            ? getFormattedDate(curRecord().targetDate, options.dateDisplayMode)
+            ? getFormattedDate(
+                curRecord().targetDate,
+                options.dateDisplayMode,
+                options.dateDisplaySlashes,
+              )
             : "___________"}
         </h2>
         {(options.inputMode === InputMode.TextInput ||

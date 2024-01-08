@@ -69,6 +69,29 @@ function OptionsPage() {
             );
           })}
         </div>
+        <div>
+          Date Display Separater:{" "}
+          <button
+            class={
+              "text-option" + (options().dateDisplaySlashes ? " selected" : "")
+            }
+            onClick={() =>
+              setOptions({ ...options(), dateDisplaySlashes: true })
+            }
+          >
+            /
+          </button>
+          <button
+            class={
+              "text-option" + (!options().dateDisplaySlashes ? " selected" : "")
+            }
+            onClick={() =>
+              setOptions({ ...options(), dateDisplaySlashes: false })
+            }
+          >
+            -
+          </button>
+        </div>
       </div>
     </div>
   );

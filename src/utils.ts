@@ -54,30 +54,42 @@ export function getStoredOptions(): Options {
     return {
       inputMode: InputMode.TextInput,
       dateDisplayMode: DateDisplayMode.YYYYMMDD,
+      dateDisplaySlashes: true,
       blindTime: 0,
+      dateRangeYearStart: 1,
+      dateRangeYearEnd: 3000,
     };
   }
   return {
     inputMode: InputMode.TextInput,
     dateDisplayMode: DateDisplayMode.YYYYMMDD,
+    dateDisplaySlashes: true,
     blindTime: 0,
+    dateRangeYearStart: 1,
+    dateRangeYearEnd: 3000,
     ...JSON.parse(stored_records),
   };
 }
 
-export function getFormattedDate(date: Date, format: DateDisplayMode): string {
+export function getFormattedDate(
+  date: Date,
+  format: DateDisplayMode,
+  slashes: boolean,
+): string {
   console.log(DateDisplayMode[format]);
   const year = date.toISOString().slice(0, 4);
   const month = date.toISOString().slice(5, 7);
   const day = date.toISOString().slice(8, 10);
 
+  const s = slashes ? "/" : "-";
+
   switch (format) {
     case DateDisplayMode.YYYYMMDD:
-      return year + "-" + month + "-" + day;
+      return year + s + month + s + day;
     case DateDisplayMode.DDMMYYYY:
-      return day + "-" + month + "-" + year;
+      return day + s + month + s + year;
     case DateDisplayMode.MMDDYYYY:
-      return month + "-" + day + "-" + year;
+      return month + s + day + s + year;
     case DateDisplayMode.MonthDDYYYY:
       return date.toLocaleDateString("en-US", {
         year: "numeric",
