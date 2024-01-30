@@ -20,7 +20,7 @@ export function clamp(n: number, min: number, max: number) {
 
 export function getNewRecord(startYear: number, endYear: number): Record {
   startYear = clamp(startYear, 0, 99999);
-  endYear = clamp(startYear, 0, 99999);
+  endYear = clamp(endYear, 0, 99999);
   if (startYear > endYear) {
     const t = startYear;
     startYear = endYear;
