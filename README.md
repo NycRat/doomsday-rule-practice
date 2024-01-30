@@ -24,3 +24,7 @@ How long until date disappears from screen (0s means no blind mode)
 - **DDMMYYYY**, ex. 23-04-1423
 - **MMDDYYYY**, ex. 04-23-1423
 - **MonthDDYYYY**, ex. April 23, 1423
+
+### Date Range
+
+- **StartYear-01-01 to EndYear-12-31**
