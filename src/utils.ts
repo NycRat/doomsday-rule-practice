@@ -6,15 +6,32 @@ export function getRandomDate(start: Date, end: Date) {
 
   // Calculate a random time between start and end dates
   const randomTime = startDate + Math.random() * (endDate - startDate);
+  console.log(endDate - startDate);
 
   const randomDate = new Date(randomTime);
 
   return randomDate;
 }
 
-export function getNewRecord(): Record {
-  const startDate = new Date("0001-01-01");
-  const endDate = new Date("3000-12-31");
+
+export function clamp(n: number, min: number, max: number) {
+  return Math.max(min, Math.min(n, max));
+}
+
+export function getNewRecord(startYear: number, endYear: number): Record {
+  startYear = clamp(startYear, 0, 99999);
+  endYear = clamp(startYear, 0, 99999);
+  if (startYear > endYear) {
+    const t = startYear;
+    startYear = endYear;
+    endYear = t;
+  }
+
+  const startDate = new Date(`${startYear.toString().padStart(4, "0")}-01-01`);
+  const endDate = new Date(`${endYear.toString().padStart(4, "0")}-12-31`);
+
+  // console.log(startYear);
+  // console.log(endYear);
 
   let randomDate = getRandomDate(startDate, endDate);
 
@@ -76,7 +93,6 @@ export function getFormattedDate(
   format: DateDisplayMode,
   slashes: boolean,
 ): string {
-  console.log(DateDisplayMode[format]);
   const year = date.toISOString().slice(0, 4);
   const month = date.toISOString().slice(5, 7);
   const day = date.toISOString().slice(8, 10);

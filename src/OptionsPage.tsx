@@ -1,7 +1,7 @@
 import { A } from "@solidjs/router";
 import { DateDisplayMode, InputMode, Options } from "./models";
 import { createEffect, createSignal } from "solid-js";
-import { getStoredOptions } from "./utils";
+import { clamp, getStoredOptions } from "./utils";
 
 function OptionsPage() {
   const [options, setOptions] = createSignal<Options>(getStoredOptions());
@@ -9,6 +9,28 @@ function OptionsPage() {
   createEffect(() => {
     localStorage.setItem("options", JSON.stringify(options()));
   }, [options]);
+
+  function updateDateEnd(yearStr: string) {
+    let year = parseInt(yearStr.replace(/[^0-9]/g, ""));
+    year = clamp(year, 0, 99999);
+    year = clamp(year, options().dateRangeYearStart, 99999);
+    if (year && !isNaN(year)) {
+      setOptions({ ...options(), dateRangeYearEnd: year });
+    } else {
+      setOptions({ ...options(), dateRangeYearEnd: 0 });
+    }
+  }
+
+  function updateDateStart(yearStr: string) {
+    let year = parseInt(yearStr.replace(/[^0-9]/g, ""));
+    year = clamp(year, 0, 99999);
+    year = clamp(year, 0, options().dateRangeYearEnd);
+    if (year && !isNaN(year)) {
+      setOptions({ ...options(), dateRangeYearStart: year });
+    } else {
+      setOptions({ ...options(), dateRangeYearStart: 0 });
+    }
+  }
 
   return (
     <div>
@@ -91,6 +113,25 @@ function OptionsPage() {
           >
             -
           </button>
+        </div>
+        <div>
+          Date Range:
+          <input
+            inputmode="numeric"
+            pattern="[0-9]*"
+            value={options().dateRangeYearStart}
+            onInput={(ev) => {
+              updateDateStart(ev.target.value);
+            }}
+          />
+          <input
+            inputmode="numeric"
+            pattern="[0-9]*"
+            value={options().dateRangeYearEnd}
+            onInput={(ev) => {
+              updateDateEnd(ev.target.value);
+            }}
+          />
         </div>
       </div>
     </div>

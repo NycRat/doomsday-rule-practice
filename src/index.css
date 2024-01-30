@@ -21,9 +21,9 @@ h1 {
   margin: 0;
   text-align: center;
   /* animation-timing-function: linear; */
-  animation-name: spin;
-  animation-duration: 1.5s;
-  animation-iteration-count: 1;
+  /* animation-name: spin; */
+  /* animation-duration: 1.5s; */
+  /* animation-iteration-count: 1; */
 }
 
 h2 {

@@ -14,15 +14,17 @@ import GithubLogo from "./github-mark.svg";
 function App() {
   const placeholderText = "Day of week (0-6)";
 
-  const [records, setRecords] = createSignal<Record[]>(getStoredRecords());
-  const [curRecord, setCurRecord] = createSignal<Record>(getNewRecord());
-  const [inputValue, setInputValue] = createSignal(placeholderText);
-
   const options: Options = getStoredOptions();
+
+  const [records, setRecords] = createSignal<Record[]>(getStoredRecords());
+  const [curRecord, setCurRecord] = createSignal<Record>(
+    getNewRecord(options.dateRangeYearStart, options.dateRangeYearEnd),
+  );
+  const [inputValue, setInputValue] = createSignal(placeholderText);
 
   function handleSubmit() {
     if (inputValue() === "r") {
-      setCurRecord(getNewRecord());
+      setCurRecord(getNewRecord(options.dateRangeYearStart, options.dateRangeYearEnd));
       setInputValue(placeholderText);
       return;
     }
@@ -45,7 +47,7 @@ function App() {
     }
 
     setRecords([record, ...records()]);
-    setCurRecord(getNewRecord());
+    setCurRecord(getNewRecord(options.dateRangeYearStart, options.dateRangeYearEnd));
     setInputValue(placeholderText);
     localStorage.setItem("records", JSON.stringify(records()));
   }
@@ -175,7 +177,7 @@ function App() {
               <InputButton
                 text={"Reset"}
                 onClick={() => {
-                  setCurRecord(getNewRecord());
+                  setCurRecord(getNewRecord(options.dateRangeYearStart, options.dateRangeYearEnd));
                   setInputValue(placeholderText);
                 }}
               />
