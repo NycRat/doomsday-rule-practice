@@ -35,4 +35,5 @@ export interface Options {
   dateDisplaySlashes: boolean;
   dateRangeYearStart: number;
   dateRangeYearEnd: number;
+  textToSpeech: boolean;
 }

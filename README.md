@@ -10,7 +10,9 @@ Web app to practice [doomsday rule](https://en.wikipedia.org/wiki/Doomsday_rule)
 
 ### Blind Mode (0-10s)
 
-How long until date disappears from screen (0s means no blind mode)
+- How long until date disappears from screen
+- (0s means no blind mode)
+- (-0.25s means complete blind, use text to speech with this)
 
 ### Input Mode
 

@@ -13,7 +13,6 @@ export function getRandomDate(start: Date, end: Date) {
   return randomDate;
 }
 
-
 export function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(n, max));
 }
@@ -67,23 +66,20 @@ export function getStoredRecords(): Record[] {
 
 export function getStoredOptions(): Options {
   let stored_records = window.localStorage.getItem("options");
-  if (!stored_records) {
-    return {
-      inputMode: InputMode.TextInput,
-      dateDisplayMode: DateDisplayMode.YYYYMMDD,
-      dateDisplaySlashes: true,
-      blindTime: 0,
-      dateRangeYearStart: 1,
-      dateRangeYearEnd: 3000,
-    };
-  }
-  return {
+  const default_options = {
     inputMode: InputMode.TextInput,
     dateDisplayMode: DateDisplayMode.YYYYMMDD,
     dateDisplaySlashes: true,
     blindTime: 0,
     dateRangeYearStart: 1,
     dateRangeYearEnd: 3000,
+    textToSpeech: false,
+  };
+  if (!stored_records) {
+    return default_options;
+  }
+  return {
+    ...default_options,
     ...JSON.parse(stored_records),
   };
 }

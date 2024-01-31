@@ -22,9 +22,36 @@ function App() {
   );
   const [inputValue, setInputValue] = createSignal(placeholderText);
 
+  setNewRecord();
+
+  function speak(text: string) {
+    if (options.textToSpeech) {
+      const synthesis = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(text);
+
+      synthesis.speak(utterance);
+    }
+  }
+
+  function setNewRecord() {
+    const newRecord = getNewRecord(
+      options.dateRangeYearStart,
+      options.dateRangeYearEnd,
+    );
+    speak(
+      newRecord.targetDate.toLocaleString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
+    );
+    setCurRecord(newRecord);
+    setInputValue(placeholderText);
+  }
+
   function handleSubmit() {
     if (inputValue() === "r") {
-      setCurRecord(getNewRecord(options.dateRangeYearStart, options.dateRangeYearEnd));
+      setNewRecord();
       setInputValue(placeholderText);
       return;
     }
@@ -47,8 +74,7 @@ function App() {
     }
 
     setRecords([record, ...records()]);
-    setCurRecord(getNewRecord(options.dateRangeYearStart, options.dateRangeYearEnd));
-    setInputValue(placeholderText);
+    setNewRecord();
     localStorage.setItem("records", JSON.stringify(records()));
   }
 
@@ -177,8 +203,7 @@ function App() {
               <InputButton
                 text={"Reset"}
                 onClick={() => {
-                  setCurRecord(getNewRecord(options.dateRangeYearStart, options.dateRangeYearEnd));
-                  setInputValue(placeholderText);
+                  setNewRecord();
                 }}
               />
             </div>

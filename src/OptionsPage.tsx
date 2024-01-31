@@ -43,7 +43,7 @@ function OptionsPage() {
           Blind Time:
           <input
             type="range"
-            min={0}
+            min={-0.25}
             max={10}
             step={0.25}
             value={options().blindTime}
@@ -52,6 +52,21 @@ function OptionsPage() {
             }}
           />{" "}
           ({options().blindTime.toFixed(2)}s)
+        </div>
+        <div>
+          Text To Speech:{" "}
+          <button
+            class={"text-option" + (options().textToSpeech ? " selected" : "")}
+            onClick={() => setOptions({ ...options(), textToSpeech: true })}
+          >
+            Enabled
+          </button>
+          <button
+            class={"text-option" + (!options().textToSpeech ? " selected" : "")}
+            onClick={() => setOptions({ ...options(), textToSpeech: false })}
+          >
+            Disabled
+          </button>
         </div>
         <div>
           Input Mode:{" "}
@@ -92,7 +107,7 @@ function OptionsPage() {
           })}
         </div>
         <div>
-          Date Display Separater:{" "}
+          Date Display Separator:{" "}
           <button
             class={
               "text-option" + (options().dateDisplaySlashes ? " selected" : "")
