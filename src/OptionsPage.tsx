@@ -149,7 +149,7 @@ function OptionsPage() {
           />
         </div>
         <div>
-          Colorblind mode:
+          <span style="color:red">C</span><span style="color:orange">o</span><span style="color:yellow">l</span><span style="color:green">o</span><span style="color:blue">r</span><span style="color:purple">b</span><span style="color:magenta">l</span><span style="color:red">i</span><span style="color:orange">n</span><span style="color:yellow">d</span> mode:
           <input type="checkbox"/>
         </div>
       </div>
