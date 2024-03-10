@@ -186,6 +186,12 @@ table {
   background-color: #381a40;
 }
 
+#options-page {
+  margin: auto;
+  margin-top: 30px;
+  width: 40em;
+}
+
 #options-page div {
   margin: 10px;
 }
