@@ -148,6 +148,10 @@ function OptionsPage() {
             }}
           />
         </div>
+        <div>
+          Colorblind mode:
+          <input type="checkbox"/>
+        </div>
       </div>
     </div>
   );
